@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main>
+        <h1>Admin Product Overview</h1>
+        <p>This is a protected area. Click the button to fetch all registered products.</p>
+        <button id="fetch-products-btn">Fetch All Products</button>
+        <div id="admin-message"></div>
+        <table id="products-table">
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Serial Number</th>
+                    <th>Purchase Date</th>
+                    <th>Registered By</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </main>
+    <script src="admin-script.js"></script>
+</body>
+</html>
