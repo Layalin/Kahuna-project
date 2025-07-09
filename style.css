@@ -1,3 +1,4 @@
+p { color: blue; } /* For testing test.html */
 :root {
     --primary-color: #007bff;
     --error-color: #dc3545;
@@ -13,19 +14,20 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
     margin: 0;
+    padding: 1rem 0;
 }
 main {
     width: 100%;
-    max-width: 500px; /* Increased width for more complex forms */
+    max-width: 600px;
     padding: 2rem;
     background: var(--card-bg);
     border-radius: 8px;
-    box-shadow: 0 4px_6px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 form { display: flex; flex-direction: column; }
-h1 { text-align: center; margin-bottom: 1.5rem; }
+h1, h3 { text-align: center; margin-top: 0; margin-bottom: 1.5rem; }
 .form-group { margin-bottom: 1rem; }
 label { display: block; margin-bottom: 0.5rem; font-weight: 500; }
 input, select {
@@ -34,38 +36,31 @@ input, select {
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
+    background-color: white;
+    font-size: 1rem;
 }
 button { padding: 0.75rem; border: none; border-radius: 4px; background-color: var(--primary-color); color: white; font-size: 1rem; font-weight: bold; cursor: pointer; transition: background-color 0.2s; }
 button:hover { background-color: #0056b3; }
-
-/* --- THIS IS THE MISSING CODE --- */
-.hidden {
-    display: none;
-}
+.hidden { display: none; }
 .message-area {
     margin-top: 1rem;
     text-align: center;
     padding: 0.75rem;
     border-radius: 4px;
-    display: none; /* Hidden by default */
+    display: none;
     word-wrap: break-word;
 }
 .message-area.success { background-color: #e9f7ef; color: var(--success-color); display: block; }
 .message-area.error { background-color: #f8d7da; color: var(--error-color); display: block; }
-.toggle-link {
-    text-align: center;
-    margin-top: 1rem;
-    font-size: 0.9rem;
-}
+.toggle-link { text-align: center; margin-top: 1rem; font-size: 0.9rem; }
 .admin-controls {
     display: flex;
+    flex-wrap: wrap;
     gap: 10px;
     margin-bottom: 1rem;
     align-items: center;
 }
-.admin-controls input {
-    flex-grow: 1;
-}
+.admin-controls input { flex-grow: 1; }
 #create-user-form {
     padding: 1rem;
     border: 1px solid #eee;
@@ -73,7 +68,6 @@ button:hover { background-color: #0056b3; }
     margin-top: 1.5rem;
     background-color: #f9f9f9;
 }
-table { width: 100%; border-collapse: collapse; margin-top: 1.5rem; }
+table { width: 100%; border-collapse: collapse; margin-top: 1.5rem; font-size: 0.9rem; }
 th, td { text-align: left; padding: 8px; border-bottom: 1px solid #ddd; }
 th { background-color: #f2f2f2; }
-/* --- END OF MISSING CODE --- */

@@ -1,4 +1,18 @@
 <?php
+// --- FINAL CORS SOLUTION ---
+// This header must be sent with EVERY response to allow the browser to read it.
+header("Access-Control-Allow-Origin: *");
+
+// This block handles the OPTIONS preflight request.
+if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+    header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
+    header("Access-Control-Allow-Headers: Content-Type, Authorization");
+    exit(0);
+}
+// --- END ---
+
+
+// --- Existing Database Connection Code ---
 $host = 'localhost';
 $dbname = 'kahuna_db';
 $username = 'root';

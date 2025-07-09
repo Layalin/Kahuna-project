@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Register Form ---
     const createAccountForm = document.getElementById('create-account-form');
     
-    // --- Generic API Caller ---
+    // --- Generic API Caller (for authenticated requests)---
     async function apiCall(endpoint, method = 'GET', body = null) {
         const options = { method, headers: { 'Content-Type': 'application/json' } };
         if (authToken) {
@@ -47,7 +47,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const username = document.getElementById('username').value;
         const password = document.getElementById('password').value;
         try {
-            const data = await apiCall('login.php', 'POST', { username, password });
+            const response = await fetch('http://localhost/kahuna-api/login.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password })
+            });
+            const data = await response.json();
+            if (!response.ok) throw new Error(data.error || 'Login Failed');
+
             authToken = data.token;
             currentUser = data.user;
             loginSection.classList.add('hidden');
@@ -88,7 +95,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const username = document.getElementById('new-username').value;
         const password = document.getElementById('new-password').value;
         try {
-            await apiCall('register-user.php', 'POST', { username, password, role: 'client' });
+            const response = await fetch('http://localhost/kahuna-api/register-user.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password, role: 'client' })
+            });
+            const data = await response.json();
+            if (!response.ok) throw new Error(data.error || 'Account creation failed');
+
             registerMessage.textContent = 'Account created successfully! Please log in.';
             registerMessage.classList.add('success');
         } catch (error) {
@@ -97,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --- Setup Listeners for Dashboards (This is the key change) ---
+    // --- Setup Listeners for Dashboards ---
     function setupAdminDashboardListeners() {
         document.getElementById('logout-link').addEventListener('click', logout);
         document.getElementById('fetch-products-btn').addEventListener('click', adminFetchProducts);
@@ -130,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             products.forEach(p => {
                 const row = document.createElement('tr');
-                row.innerHTML = `<td>${p.product_name}</td><td>${p.serial_number}</td><td>${p.purchase_date}</td><td>${p.registered_by_user}</td>`;
+                row.innerHTML = `<td>${p.product_name}</td><td>${p.serial_number}</td><td>${p.purchase_date}</td><td>${p.registered_by_user}</td><td>${p.warranty_days_left}</td>`;
                 adminTableBody.appendChild(row);
             });
         } catch (error) {

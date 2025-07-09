@@ -9,7 +9,13 @@ $sql = "";
 $params = [];
 
 if ($user_role === 'admin') {
-    $sql = "SELECT p.product_name, p.serial_number, rp.purchase_date, u.username AS registered_by_user
+    // NEW: Added warranty calculation for the admin view
+    $sql = "SELECT 
+                p.product_name, 
+                p.serial_number, 
+                rp.purchase_date, 
+                u.username AS registered_by_user,
+                DATEDIFF(DATE_ADD(rp.purchase_date, INTERVAL p.warranty_years YEAR), CURDATE()) AS warranty_days_left
             FROM REGISTERED_PRODUCTS rp
             JOIN PRODUCTS p ON rp.product_serial_number = p.serial_number
             JOIN USERS u ON rp.user_id = u.id";
@@ -38,7 +44,7 @@ try {
     $products = $stmt->fetchAll();
 
     // Ensure warranty days left is not negative
-    foreach ($products as &$product) { // Note the & to modify the array directly
+    foreach ($products as &$product) {
         if (isset($product['warranty_days_left'])) {
             $product['warranty_days_left'] = max(0, (int)$product['warranty_days_left']);
         }

@@ -25,7 +25,17 @@ The live project can be found at this repository: [https://github.com/Layalin/Ka
 1.  **Install Local Server:** Ensure you have a local server environment like **XAMPP** running with Apache and MySQL services started.
 2.  **Get the Code:** Clone or download this repository (`https://github.com/Layalin/Kahuna-project.git`) into your server's web root directory (e.g., `htdocs` for XAMPP).
 3.  **Run Database Setup:** In your web browser, navigate to `http://localhost/kahuna-api/setup-database.php`. This will automatically create the `kahuna_db` database and all necessary tables, and populate the initial product list.
-4.  **Launch the Application:** Go to `http://localhost/kahuna-api/`. The application is now ready to use.
+4.  **Create the Admin User:** The setup does not create any users. Use a tool like Postman to create the initial admin account needed for testing.
+    * Send a `POST` request to `http://localhost/kahuna-api/register-user.php`
+    * Use the following JSON in the request body:
+        ```json
+        {
+            "username": "superadmin",
+            "password": "adminpassword",
+            "role": "admin"
+        }
+        ```
+5.  **Launch the Application:** Go to `http://localhost/kahuna-api/`. The application is now ready to use. You can log in with the `superadmin` credentials.
 
 ## Database Design (ERD)
 
