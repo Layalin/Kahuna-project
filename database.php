@@ -1,18 +1,22 @@
 <?php
-// --- FINAL CORS SOLUTION ---
-// This header must be sent with EVERY response to allow the browser to read it.
+// --- FINAL CORS & PREFLIGHT HANDLING ---
+// This header allows your front-end (even if on a different domain) to access the API.
 header("Access-Control-Allow-Origin: *");
+// This tells the browser which headers are allowed in the actual request.
+header("Access-Control-Allow-Headers: Content-Type, Authorization");
+// This tells the browser which methods are allowed.
+header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
 
-// This block handles the OPTIONS preflight request.
+// This block specifically handles the preflight 'OPTIONS' request.
 if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
-    header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
-    header("Access-Control-Allow-Headers: Content-Type, Authorization");
-    exit(0);
+    // A preflight request just needs a 200 OK response to succeed.
+    http_response_code(200);
+    exit();
 }
 // --- END ---
 
 
-// --- Existing Database Connection Code ---
+// --- Database Connection Code ---
 $host = 'localhost';
 $dbname = 'kahuna_db';
 $username = 'root';
