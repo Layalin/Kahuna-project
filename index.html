@@ -18,6 +18,7 @@
                 <p class="toggle-link">Don't have an account? <a href="#" id="show-register-form-link">Create one</a></p>
             </form>
         </section>
+
         <section id="register-section" class="hidden">
             <form id="create-account-form">
                 <h1>Create Account</h1>
@@ -28,6 +29,7 @@
                 <p class="toggle-link">Already have an account? <a href="#" id="show-login-form-link">Login</a></p>
             </form>
         </section>
+
         <section id="admin-dashboard" class="hidden">
             <h1>Admin Dashboard</h1>
             <p>Welcome, <span id="admin-username"></span>! <a href="#" id="logout-link" class="logout-link">Logout</a></p>
@@ -35,6 +37,7 @@
                 <input type="text" id="filter-username" placeholder="Filter by username...">
                 <button id="fetch-products-btn">Fetch Products</button>
                 <button id="toggle-user-form-btn">Create User</button>
+                <button id="toggle-add-product-form-btn">Add New Product</button>
             </div>
             <form id="create-user-form" class="hidden">
                 <h3>Create New User Account</h3>
@@ -49,9 +52,17 @@
                 </div>
                 <button type="submit">Save User</button>
             </form>
+            <form id="add-product-form" class="hidden">
+                <h3>Add Product to Master List</h3>
+                <div class="form-group"><label for="add-serial">Serial Number</label><input type="text" id="add-serial" required></div>
+                <div class="form-group"><label for="add-name">Product Name</label><input type="text" id="add-name" required></div>
+                <div class="form-group"><label for="add-warranty">Warranty (Years)</label><input type="number" id="add-warranty" required></div>
+                <button type="submit">Save Product</button>
+            </form>
             <div id="admin-message" class="message-area"></div>
             <table class="products-table"><thead><tr><th>Product Name</th><th>Serial #</th><th>Purchase Date</th><th>Registered By</th><th>Warranty Left (Days)</th></tr></thead><tbody></tbody></table>
         </section>
+
         <section id="client-dashboard" class="hidden">
             <h1>Client Dashboard</h1>
             <p>Welcome, <span id="client-username"></span>! <a href="#" id="logout-link-client" class="logout-link">Logout</a></p>
